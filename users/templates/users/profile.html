@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<div class='container mt-5 mx-auto text-center'>
+    <div class='profile-img rounded-circle mx-auto' style='background-image: url("{% firstof profile.image.url 'https://statics.whichmuseum.com/resources/images/user-icon.png' %}");'></div>
+    <p class='mt-2 mb-2'>{{ request.user.username }}</p>
+    <p class='mt-2'>About: </p>
+    <p class='mb-5'>{{ profile.bio }}</p>
+
+    {% if profile.user == request.user %}
+    <a href='{% url "edit_profile" %}' class='btn btn-primary'>Edit Profile</a>
+    {% endif %}
+</div>
+{% endblock %}

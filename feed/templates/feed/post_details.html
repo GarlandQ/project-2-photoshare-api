@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %}Post Details{% endblock %}
+
+{% block body %}
+<div class='container'>
+    <div class='mt-3 post-item'>
+        <div class='card mb-2 mx-auto' style='max-width: 50%'>
+            <a class='mb-1 d-flex align-items-center m-2' href='{% url "profile" post.user.username %}'>
+                <div class='mr-1 profile-img-sm rounded-circle d-inline-block' style='background-image: url("{% firstof post.user.profile.image.url 'https://statics.whichmuseum.com/resources/images/user-icon.png' %}");'></div>
+                <p class='m-0 d-inline'>{{ post.user.username }}</p>
+            </a>
+            <div class='m-1 font-weight-light date'>Created {{ post.date_posted|naturaltime }}</div>
+            <div class='photo-card' style='background-image: url("{% firstof post.picture.url 'https://aliceasmartialarts.com/wp-content/uploads/2017/04/default-image.jpg' %}");'></div>
+            <div class='card-body'>
+                <p class='card-text mb-2'>{{ post.description }}</p>
+            </div>
+        </div>
+        <div class='card mb-2'>
+            <div class='card-body'>
+                <form method='post'>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class='mt-1 btn btn-primary' type='submit'>Add Comment</button>
+                </form>
+            </div>
+        </div>
+
+        {% for comment in post.comments.all %}
+        <div class='card mb-2'>
+            <div class='card-body'>
+                <a class='mb-1 d-flex align-items-center m-2' href='{% url "profile" post.user.username %}'>
+                    <div class='mr-1 profile-img-sm rounded-circle d-inline-block' style='background-image: url("{% firstof comment.user.profile.image.url 'https://statics.whichmuseum.com/resources/images/user-icon.png' %}");'></div>
+                    <p class='m-0 d-inline'>{{ comment.user.username }}</p>
+                </a>
+                <div class='m-1 font-weight-light date'>Added {{ comment.comment_date|naturaltime }}</div>
+                <p>{{ comment.comment }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

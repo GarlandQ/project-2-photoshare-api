@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class='container'>
+    <div class='mt-3 post-item'>
+        {% for post in posts %}
+        <div class='card mb-5 mx-auto' style='max-width: 50%'>
+            <a class='mb-1 d-flex align-items-center m-2' href='{% url "profile" post.user.username %}'>
+                <div class='mr-1 profile-img-sm rounded-circle d-inline-block' style='background-image: url("{% firstof post.user.profile.image.url 'https://statics.whichmuseum.com/resources/images/user-icon.png' %}");'></div>
+                <p class='m-0 d-inline'>{{ post.user.username }}</p>
+            </a>
+            <div class='m-1 font-weight-light date'>Created {{ post.date_posted|naturaltime }}</div>
+            <div class='photo-card' style='background-image: url("{% firstof post.picture.url 'https://aliceasmartialarts.com/wp-content/uploads/2017/04/default-image.jpg' %}");'></div>
+            <div class='card-body'>
+                <p class='card-text mb-2'>{{ post.description }}</p>
+                <a href='{% url "post_details" post.id %}'>Comments | {{ post.comments.count }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if is_paginated %}
+        <div class='mx-auto text-center'>
+        {% if page_obj.has_previous %}
+            <a class='btn btn-primary' href='?page={{ page_obj.previous_page_number }}'>Previous</a>
+        {% else %}
+            <button class='btn btn-primary' disabled>Previous</button>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <a class='btn btn-primary ml-2' href='?page={{ page_obj.next_page_number }}'>Next</a>
+        {% else %}
+            <button class='btn btn-primary' disabled>Next</button>
+        {% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
