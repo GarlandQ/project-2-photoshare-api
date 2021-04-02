@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'users.apps.UsersConfig', # Users app
     'feed.apps.FeedConfig',
+    'restAPI.apps.RestapiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.humanize',
