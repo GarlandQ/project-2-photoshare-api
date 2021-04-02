@@ -26,3 +26,7 @@ urlpatterns = [
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )  # include media files into routes
+
+urlpatterns += [
+    path("api-login/", include("rest_framework.urls")),
+]

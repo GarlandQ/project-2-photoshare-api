@@ -5,19 +5,24 @@ from django.contrib.auth.models import User
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, mixins, generics
+from rest_framework import status, mixins, generics, permissions
 from users.models import Profile
 from restAPI.serializers import ProfileSerializer
+from restAPI.permissions import IsOwnerOrReadOnly
 
 
+# List all user profiles
 class ProfileList(generics.ListAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
-class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+# List a specific user profile
+class ProfileDetail(generics.RetrieveUpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 # class ProfileList(
