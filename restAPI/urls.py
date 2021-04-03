@@ -8,6 +8,13 @@ urlpatterns = [
     path(
         "api/profiles/<int:pk>/", views.ProfileDetail.as_view(), name="profile-detail"
     ),
+    path("api/posts/", views.PostList.as_view(), name="post-list"),
+    path("api/posts/<int:pk>/", views.PostDetail.as_view(), name="post-detail"),
+    path(
+        "api/posts/<int:pk>/comments/",
+        views.CommentList.as_view(),
+        name="comment-list",
+    ),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
