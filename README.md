@@ -8,7 +8,7 @@ Time spent: **XX** hours spent in total
 
 The following **required** functionality is completed:
 ### PROFILES
-- [ ] An authenticated User can retrieve a list of profiles on the platform by sending a GET request to /api/profiles/. Each profile object contains the following fields (including a url to access that specific profile)
+- [x] An authenticated User can retrieve a list of profiles on the platform by sending a GET request to /api/profiles/. Each profile object contains the following fields (including a url to access that specific profile)
     ```json
     [
         {
@@ -27,7 +27,7 @@ The following **required** functionality is completed:
         },
     ]
     ```
-- [ ] An authenticated User can retrieve a profile object by sending a GET request to /api/profiles/\<int:profile_id> containing the following fields
+- [x] An authenticated User can retrieve a profile object by sending a GET request to /api/profiles/\<int:profile_id> containing the following fields
     ```json
     {
         "id": 1,
@@ -37,7 +37,7 @@ The following **required** functionality is completed:
         "url": "http:/your-api-url.com/api/profiles/1/"
     }
     ```
-- [ ] An authenticated User can edit her bio (PUT/PATCH) at /api/profile/\<int:profile_id> but **NOT** the bio of others. The request should return the following fields
+- [x] An authenticated User can edit her bio (PUT/PATCH) at /api/profile/\<int:profile_id> but **NOT** the bio of others. The request should return the following fields
     ```json
     {
         "id": 2,
@@ -118,7 +118,7 @@ The following **required** functionality is completed:
         "url": "https://belashare.herokuapp.com/api/posts/7/"
     }
     ```
-- [ ] An authenticated User can change any of her posts' description by sending a PUT/PATCH request to /api/posts/\<int:post_id> but **NOT** the posts of others.
+- [x] An authenticated User can change any of her posts' description by sending a PUT/PATCH request to /api/posts/\<int:post_id> but **NOT** the posts of others.
     ```json
     {
         "id": 7,
@@ -134,10 +134,10 @@ The following **required** functionality is completed:
         "url": "https://belashare.herokuapp.com/api/posts/7/"
     }
     ```
-- [ ] An authenticated User can delete any of her posts by sending a DELETE request to /api/posts/\<int:post_id> but **NOT** the posts of others. the request should return an HTTP 204 No Content
+- [x] An authenticated User can delete any of her posts by sending a DELETE request to /api/posts/\<int:post_id> but **NOT** the posts of others. the request should return an HTTP 204 No Content
 
 ### COMMENTS
-- [ ] An authenticated User can retrieve a list of comments on a post by sending a GET request to /api/posts/\<int:post_id>/comments/. Each post object contains the following fields
+- [] An authenticated User can retrieve a list of comments on a post by sending a GET request to /api/posts/\<int:post_id>/comments/. Each post object contains the following fields
     ```json
     [
         {
