@@ -1,5 +1,5 @@
 [![Work in Repl.it](https://classroom.github.com/assets/work-in-replit-14baed9a392b3a25080506f3b7b6d57f295ec2978f6f33ec97e36a161684cbe9.svg)](https://classroom.github.com/online_ide?assignment_repo_id=4460163&assignment_repo_type=AssignmentRepo)
-# Project 1 | **PhotoShare-api**
+# Project 2 | **PhotoShare-api**
 
 **PhotoShare-api** - An api for a simple PhotoSharing Application
 Time spent: **~8** hours spent in total
@@ -169,13 +169,13 @@ The following **optional** features are implemented:
 ## TESTING
 Code Coverage: 38%
 
-A coverage report is included at: [insert coverage report path]
+A coverage report is included at: [Here](https://github.com/notabela-org/project-2-photoshare-api-GarlandQ/tree/master/pytestcov)
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='[insert_gif_source_here]' title='Video Walkthrough' alt='Video Walkthrough' />
+<img src='https://github.com/notabela-org/project-2-photoshare-api-GarlandQ/blob/master/photoshareAPI.gif' title='Video Walkthrough' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
