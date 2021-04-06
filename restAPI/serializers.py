@@ -9,30 +9,23 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         view_name="profile-detail", read_only=True
     )
 
-    # user = serializers.SerializerMethodField()
     user = serializers.CharField(source="user.username", read_only=True)
 
     class Meta:
         model = Profile
         fields = ["id", "user", "image", "bio", "url"]
 
-    # def get_user(self, obj):
-    #     return obj.user.username
 
-
-class CommentSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField()
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.CharField(source="user.username", read_only=True)
 
     class Meta:
         model = Comment
         fields = ["user", "comment", "comment_date"]
         read_only_fields = ["comment_date"]
 
-    def get_user(self, obj):
-        return obj.user.username
 
-
-class PostUserSerializer(serializers.ModelSerializer):
+class PostUserSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name="profile-detail", read_only=True
     )
@@ -44,10 +37,8 @@ class PostUserSerializer(serializers.ModelSerializer):
         fields = ["id", "user", "url"]
 
 
-class PostSerializer(serializers.ModelSerializer):
-    # user = PostUserSerializer(read_only=True, source="user.username")
-    # user = PostUserSerializer
-
+class PostSerializer(serializers.HyperlinkedModelSerializer):
+    user = PostUserSerializer(source="user.profile", read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
 
     url = serializers.HyperlinkedIdentityField(view_name="post-detail", read_only=True)
@@ -63,14 +54,11 @@ class PostSerializer(serializers.ModelSerializer):
             "description",
             "url",
         ]
-        read_only_fields = ["user", "date_posted"]
-
-
-# make a postcreate serializer to make a post request
+        read_only_fields = ["date_posted"]
 
 
 class PostDetailSerializer(serializers.HyperlinkedModelSerializer):
-    user = PostUserSerializer(many=True, read_only=True, source="post_user")
+    user = PostUserSerializer(source="user.profile", read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
 
     url = serializers.HyperlinkedIdentityField(view_name="post-detail", read_only=True)

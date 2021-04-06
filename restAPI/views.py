@@ -13,6 +13,7 @@ from restAPI.serializers import (
     ProfileSerializer,
     PostSerializer,
     CommentSerializer,
+    PostUserSerializer,
     PostDetailSerializer,
 )
 from restAPI.permissions import IsOwnerOrReadOnly
@@ -40,36 +41,24 @@ class ProfileList(generics.ListAPIView):
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
 
 # List all user posts
-class PostList(generics.ListAPIView, generics.CreateAPIView):
+class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-
-# class PostList(APIView):
-#     def get(self, request, format=None):
-#         posts = Post.objects.all()
-#         serializer = PostSerializer(posts, context={"request": request}, many=True)
-#         return Response(serializer.data)
-
-#     def post(self, request, format=None):
-#         serializer = PostSerializer(data=request.data, context={"request": request})
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 # List a specific user post
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -78,15 +67,14 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 # List a specific post's comments
-class CommentList(
-    mixins.CreateModelMixin, mixins.ListModelMixin, generics.GenericAPIView
-):
+class CommentList(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user, post_id=self.kwargs["pk"])
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    def get_queryset(self):
+        post = self.kwargs["pk"]
+        return Comment.objects.filter(post=post)

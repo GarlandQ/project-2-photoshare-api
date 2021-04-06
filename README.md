@@ -49,7 +49,7 @@ The following **required** functionality is completed:
     ```
 
 ### POSTS
-- [ ] An authenticated User can retrieve a list of posts by sending a GET request to /api/posts/. Each post object contains the following fields (including a url to access that specific post)
+- [x] An authenticated User can retrieve a list of posts by sending a GET request to /api/posts/. Each post object contains the following fields (including a url to access that specific post)
     ```json
     [
         {
@@ -102,7 +102,7 @@ The following **required** functionality is completed:
         }
     ]
     ```
-- [ ] An authenticated User can add a new post by sending a POST request to /api/posts. Only a description is required, the imageField should be set to blank. The added post should automatically be associated with the user who submitted the request. The request should return the following fields
+- [x] An authenticated User can add a new post by sending a POST request to /api/posts. Only a description is required, the imageField should be set to blank. The added post should automatically be associated with the user who submitted the request. The request should return the following fields
     ```json
     {
         "id": 7,
@@ -137,7 +137,7 @@ The following **required** functionality is completed:
 - [x] An authenticated User can delete any of her posts by sending a DELETE request to /api/posts/\<int:post_id> but **NOT** the posts of others. the request should return an HTTP 204 No Content
 
 ### COMMENTS
-- [] An authenticated User can retrieve a list of comments on a post by sending a GET request to /api/posts/\<int:post_id>/comments/. Each post object contains the following fields
+- [x] An authenticated User can retrieve a list of comments on a post by sending a GET request to /api/posts/\<int:post_id>/comments/. Each post object contains the following fields
     ```json
     [
         {
@@ -152,16 +152,16 @@ The following **required** functionality is completed:
         }
     ]
     ```
-- [ ] An authenticated User can add a new comment to a post by sending a POST request to /api/posts/\<int:post_id>/comments/. The added comment should automatically be
+- [x] An authenticated User can add a new comment to a post by sending a POST request to /api/posts/\<int:post_id>/comments/. The added comment should automatically be
 associated with the user who submitted the request. The request should return the new list of comments OR the specific comment that was added
 
 ### MISC
-- [ ] All endpoints require some form of authentication (i.e unathenticated clients cannot access endpoints)
+- [x] All endpoints require some form of authentication (i.e unathenticated clients cannot access endpoints)
 - [ ] Integration tests and unit tests (where necessary) have been written for all the endpoints
 
 
 The following **optional** features are implemented:
-- [ ] A user should able to access a Browsable version (with login) of the API in Browser
+- [x] A user should able to access a Browsable version (with login) of the API in Browser
 - [ ] An authenticated User can edit any of her comments on a post by sending a POST request to /api/posts/\<int:post_id>/comments/\<int:comment_id> but **NOT** the comments of others.
 - [ ] An authenticated User can delete any of her comments on a post by sending a DELETE request to /api/posts/\<int:post_id>/comments/\<int:comment_id>/ but **NOT** the comments of others.
 
@@ -182,6 +182,11 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+The challenges when building the app was mainly trying to understand how the model relationships work alongside their respective serializers.
+
+One of the biggest problems I had to face was understanding how the models interacted with each other, and other than that, most of the API was done by Django, so not much was needed
+when it came to implementing the API views.
 
 ## License
 
