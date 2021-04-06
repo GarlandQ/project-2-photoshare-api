@@ -2,7 +2,7 @@
 # Project 1 | **PhotoShare-api**
 
 **PhotoShare-api** - An api for a simple PhotoSharing Application
-Time spent: **XX** hours spent in total
+Time spent: **~8** hours spent in total
 
 ## User Stories
 
@@ -167,7 +167,7 @@ The following **optional** features are implemented:
 
 
 ## TESTING
-Code Coverage: [insert_coverage_here]
+Code Coverage: 38%
 
 A coverage report is included at: [insert coverage report path]
 
@@ -184,9 +184,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 Describe any challenges encountered while building the app.
 
 The challenges when building the app was mainly trying to understand how the model relationships work alongside their respective serializers.
-
 One of the biggest problems I had to face was understanding how the models interacted with each other, and other than that, most of the API was done by Django, so not much was needed
-when it came to implementing the API views.
+when it came to implementing the API views. Some of the time was used to just understanding how the serializers worked in the rest framework, which the tutorial covered really well for me
+to understand and grasp the idea.
 
 ## License
 
